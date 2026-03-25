@@ -1,0 +1,103 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Scanner;
+
+public class Main {
+    public static void main() {
+
+        // Preparar o Array
+        String[][] questoes = new String[48][5];
+        int totalPerguntas = 0;
+
+        // Leitura do Arquivo CSV usando BufferedReader
+        try {
+            BufferedReader leitor = new BufferedReader(new FileReader("Perguntas.csv"));
+            String linha;
+
+            while ((linha = leitor.readLine()) != null && totalPerguntas < 48) {
+                String[] partes = linha.split("\\|");
+
+                if (partes.length == 5) {
+                    questoes[totalPerguntas] = partes;
+                    totalPerguntas++;
+                }
+            }
+            leitor.close();
+        } catch (Exception e) {
+            return;
+        }
+
+        // Lógica do Jogo
+        Scanner jogador = new Scanner(System.in);
+        String jogarNovamente;
+
+        do {
+            int pontuacao = 0;
+
+            // embaralhar as perguntas
+            for (int i = 0; i < totalPerguntas; i++) {
+                int aleatorio = (int) (Math.random() * totalPerguntas);
+
+                String[] reserva = questoes[i];
+                questoes[i] = questoes[aleatorio];
+                questoes[aleatorio] = reserva;
+            }
+
+            int quantidadeParaJogar = Math.min(10, totalPerguntas);
+
+            // Loop perguntas
+            int i = 0;
+            while (i < quantidadeParaJogar) {
+                System.out.println("\nPergunta " + (i + 1) + ": " + questoes[i][0]);
+
+                String respostaCorreta = questoes[i][1];
+
+                // Extrair as 4 opções
+                String[] opcoes = {questoes[i][1], questoes[i][2], questoes[i][3], questoes[i][4]};
+
+                // 4. Embaralhar as alternativas
+                for (int j = 0; j < opcoes.length; j++) {
+                    int aleatorio = (int) (Math.random() * opcoes.length);
+                    String reserva = opcoes[j];
+                    opcoes[j] = opcoes[aleatorio];
+                    opcoes[aleatorio] = reserva;
+                }
+
+                // Exibir as opções reordenadas
+                for (int j = 0; j < opcoes.length; j++) {
+                    System.out.println((j + 1) + ") " + opcoes[j]);
+                }
+
+                System.out.print("Escolha uma opção (1-4): ");
+                int escolha = jogador.nextInt();
+
+                if (escolha < 1 || escolha > 4) {
+                    System.out.println("Opção inválida! Você perdeu a chance de pontuar nesta questão.");
+                    i++;
+                    continue;
+                }
+
+                if (opcoes[escolha - 1].equals(respostaCorreta)) {
+                    System.out.println("Resposta Correta!");
+                    pontuacao++;
+                } else {
+                    System.out.println("Errado! A resposta correta era: " + respostaCorreta);
+                }
+                i++;
+            }
+
+            // Mostrar o resultado
+            System.out.println("\n==================================");
+            System.out.println("Fim do Quiz! Sua pontuação final: " + pontuacao + "/" + quantidadeParaJogar);
+            System.out.println("==================================");
+
+            // Jogar de novo
+            System.out.print("\n Deseja jogar novamente? (S/N): ");
+            jogarNovamente = jogador.next();
+
+        } while (jogarNovamente.equalsIgnoreCase("S"));
+
+        System.out.println("\n Obrigado por jogar! Encerrando o programa...");
+        jogador.close();
+    }
+}
