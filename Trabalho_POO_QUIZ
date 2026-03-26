@@ -55,7 +55,7 @@ public class Main {
                 // Extrair as 4 opções
                 String[] opcoes = {questoes[i][1], questoes[i][2], questoes[i][3], questoes[i][4]};
 
-                // 4. Embaralhar as alternativas
+                // Embaralhar as alternativas
                 for (int j = 0; j < opcoes.length; j++) {
                     int aleatorio = (int) (Math.random() * opcoes.length);
                     String reserva = opcoes[j];
