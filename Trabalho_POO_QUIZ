@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Main {
     public static void main() {
 
-        // Preparar o Array
+        // preparar o Array
         String[][] questoes = new String[48][5];
         int totalPerguntas = 0;
 
-        // Leitura do Arquivo CSV usando BufferedReader
+        // leitura do Arquivo CSV usando BufferedReader
         try {
             BufferedReader leitor = new BufferedReader(new FileReader("Perguntas.csv"));
             String linha;
@@ -27,7 +27,7 @@ public class Main {
             return;
         }
 
-        // Lógica do Jogo
+        // lógica do Jogo
         Scanner jogador = new Scanner(System.in);
         String jogarNovamente;
 
@@ -45,17 +45,17 @@ public class Main {
 
             int quantidadeParaJogar = Math.min(10, totalPerguntas);
 
-            // Loop perguntas
+            // loop perguntas
             int i = 0;
             while (i < quantidadeParaJogar) {
                 System.out.println("\nPergunta " + (i + 1) + ": " + questoes[i][0]);
 
                 String respostaCorreta = questoes[i][1];
 
-                // Extrair as 4 opções
+                // extrair as 4 opções
                 String[] opcoes = {questoes[i][1], questoes[i][2], questoes[i][3], questoes[i][4]};
 
-                // Embaralhar as alternativas
+                // embaralhar as alternativas
                 for (int j = 0; j < opcoes.length; j++) {
                     int aleatorio = (int) (Math.random() * opcoes.length);
                     String reserva = opcoes[j];
@@ -63,7 +63,7 @@ public class Main {
                     opcoes[aleatorio] = reserva;
                 }
 
-                // Exibir as opções reordenadas
+                // exibir as opções reordenadas
                 for (int j = 0; j < opcoes.length; j++) {
                     System.out.println((j + 1) + ") " + opcoes[j]);
                 }
@@ -86,12 +86,12 @@ public class Main {
                 i++;
             }
 
-            // Mostrar o resultado
+            // mostrar o resultado
             System.out.println("\n==================================");
             System.out.println("Fim do Quiz. Sua pontuação final: " + pontuacao + "/" + quantidadeParaJogar);
             System.out.println("==================================");
 
-            // Jogar de novo
+            // jogar de novo
             System.out.print("\n Deseja jogar novamente? (S/N): ");
             jogarNovamente = jogador.next();
 
