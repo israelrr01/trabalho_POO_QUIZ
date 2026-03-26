@@ -72,7 +72,7 @@ public class Main {
                 int escolha = jogador.nextInt();
 
                 if (escolha < 1 || escolha > 4) {
-                    System.out.println("Opção inválida! Você perdeu a chance de pontuar nesta questão.");
+                    System.out.println("Opção inválida. Você perdeu a chance de pontuar nesta questão.");
                     i++;
                     continue;
                 }
@@ -81,14 +81,14 @@ public class Main {
                     System.out.println("Resposta Correta!");
                     pontuacao++;
                 } else {
-                    System.out.println("Errado! A resposta correta era: " + respostaCorreta);
+                    System.out.println("Errado. A resposta correta era: " + respostaCorreta);
                 }
                 i++;
             }
 
             // Mostrar o resultado
             System.out.println("\n==================================");
-            System.out.println("Fim do Quiz! Sua pontuação final: " + pontuacao + "/" + quantidadeParaJogar);
+            System.out.println("Fim do Quiz. Sua pontuação final: " + pontuacao + "/" + quantidadeParaJogar);
             System.out.println("==================================");
 
             // Jogar de novo
@@ -97,7 +97,7 @@ public class Main {
 
         } while (jogarNovamente.equalsIgnoreCase("S"));
 
-        System.out.println("\n Obrigado por jogar! Encerrando o programa...");
+        System.out.println("\n Obrigado por jogar");
         jogador.close();
     }
 }
