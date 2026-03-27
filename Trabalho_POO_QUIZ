@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main() {
 
-        // preparar o Array
+
         String[][] questoes = new String[48][5];
         int totalPerguntas = 0;
 
@@ -22,12 +22,16 @@ public class Main {
                     totalPerguntas++;
                 }
             }
+
+            // fechamento do arquivo
             leitor.close();
+
+
         } catch (Exception e) {
             return;
         }
 
-        // lógica do Jogo
+
         Scanner jogador = new Scanner(System.in);
         String jogarNovamente;
 
@@ -43,13 +47,17 @@ public class Main {
                 questoes[aleatorio] = reserva;
             }
 
+
+            // limitar as perguntas
             int quantidadeParaJogar = Math.min(10, totalPerguntas);
 
-            // loop perguntas
+            // loop  de  perguntas
             int i = 0;
             while (i < quantidadeParaJogar) {
                 System.out.println("\nPergunta " + (i + 1) + ": " + questoes[i][0]);
 
+
+                // guardo que a resposta certa é a primeira
                 String respostaCorreta = questoes[i][1];
 
                 // extrair as 4 opções
@@ -71,6 +79,9 @@ public class Main {
                 System.out.print("Escolha uma opção (1-4): ");
                 int escolha = jogador.nextInt();
 
+
+
+                // verifico se ele acerto
                 if (escolha < 1 || escolha > 4) {
                     System.out.println("Opção inválida. Você perdeu a chance de pontuar nesta questão.");
                     i++;
@@ -86,12 +97,11 @@ public class Main {
                 i++;
             }
 
-            // mostrar o resultado
             System.out.println("\n==================================");
             System.out.println("Fim do Quiz. Sua pontuação final: " + pontuacao + "/" + quantidadeParaJogar);
             System.out.println("==================================");
 
-            // jogar de novo
+
             System.out.print("\n Deseja jogar novamente? (S/N): ");
             jogarNovamente = jogador.next();
 
